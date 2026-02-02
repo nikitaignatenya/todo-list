@@ -17,7 +17,7 @@ async function getDataRep() {
 async function postDataRep(
   title: string,
   description: string,
-  completed: string,
+  completed: boolean,
   createdAt: any,
 ): Promise<iTask[]> {
   const connection = await pool.connect();
@@ -39,7 +39,7 @@ async function putDataRep(
   id: number,
   title: string,
   description: string,
-  completed: string,
+  completed: boolean,
   createdAt: string,
 ): Promise<iTask[]> {
   const connection = await pool.connect();
