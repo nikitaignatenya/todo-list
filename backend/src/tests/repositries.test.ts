@@ -44,6 +44,18 @@ describe("testPost", () => {
     ]);
   });
 });
+describe("testPut", () => {
+  test("1", async () => {
+    connection.query.mockResolvedValue({
+      rows: [{ title: "", description: "", completed: true, createdAt: "" }],
+    });
+    const res = await putDataRep(1, "", "", true, "");
+    expect(connection.query).toHaveBeenCalled();
+    expect(res).toEqual([
+      { title: "", description: "", completed: true, createdAt: "" },
+    ]);
+  });
+});
 describe("testDelete", () => {
   test("1", async () => {
     connection.query.mockResolvedValue({
