@@ -16,16 +16,17 @@ describe("getData", () => {
     ]);
     const res = await getData();
     expect(mock).toHaveBeenCalled();
-    expect(res).toEqual([
-      {
-        id: 1,
-        title: "Завершить проект API",
-        description:
-          "Разработать REST API для управления задачами с использованием Node.js и PostgreSQL",
-        completed: true,
-        createdat: "2024-01-25T11:30:00.000Z",
-      },
-    ]);
+    expect(res).toHaveLength(1);
+    expect(res.length).toBeGreaterThanOrEqual(1);
+    expect(res).toBeTruthy();
+    expect(res).toContainEqual({
+      id: 1,
+      title: "Завершить проект API",
+      description:
+        "Разработать REST API для управления задачами с использованием Node.js и PostgreSQL",
+      completed: true,
+      createdat: "2024-01-25T11:30:00.000Z",
+    });
   });
   test("getTest: 2", async () => {
     const mock = jest.spyOn(repositories, "getDataRep");
@@ -35,6 +36,7 @@ describe("getData", () => {
       await getData();
     } catch (err: any) {
       expect(mock).toHaveBeenCalled();
+      expect(mock).toBeTruthy();
       expect(err.message).toBe("NOT FOUND");
     }
   });
@@ -60,16 +62,17 @@ describe("postDataTest", () => {
       "2022-03-21T14:20:00.000Z",
     );
     expect(mock).toHaveBeenCalled();
-    expect(res).toEqual([
-      {
-        id: 1,
-        title: "Завершить проект API",
-        description:
-          "Разработать REST API для управления задачами с использованием Node.js и PostgreSQL",
-        completed: true,
-        createdat: "2024-01-25T11:30:00.000Z",
-      },
-    ]);
+    expect(res).toHaveLength(1);
+    expect(res.length).toBeGreaterThanOrEqual(1);
+    expect(res).toBeTruthy();
+    expect(res).toContainEqual({
+      id: 1,
+      title: "Завершить проект API",
+      description:
+        "Разработать REST API для управления задачами с использованием Node.js и PostgreSQL",
+      completed: true,
+      createdat: "2024-01-25T11:30:00.000Z",
+    });
   });
   test("postTest: 2", async () => {
     const mock = jest.spyOn(repositories, "postDataRep");
@@ -84,6 +87,7 @@ describe("postDataTest", () => {
       );
     } catch (err: any) {
       expect(mock).toHaveBeenCalled();
+      expect(mock).toBeTruthy();
       expect(err.message).toBe("Сreation error");
     }
   });
@@ -110,16 +114,17 @@ describe("putDataTest", () => {
       "2022-03-21T14:20:00.000Z",
     );
     expect(mock).toHaveBeenCalled();
-    expect(res).toEqual([
-      {
-        id: 1,
-        title: "Завершить проект API",
-        description:
-          "Разработать REST API для управления задачами с использованием Node.js и PostgreSQL",
-        completed: true,
-        createdat: "2024-01-25T11:30:00.000Z",
-      },
-    ]);
+    expect(res.length).toBeGreaterThanOrEqual(1);
+    expect(res).toBeTruthy();
+    expect(res).toHaveLength(1);
+    expect(res).toContainEqual({
+      id: 1,
+      title: "Завершить проект API",
+      description:
+        "Разработать REST API для управления задачами с использованием Node.js и PostgreSQL",
+      completed: true,
+      createdat: "2024-01-25T11:30:00.000Z",
+    });
   });
   test("putTest: 2", async () => {
     const mock = jest.spyOn(repositories, "putDataRep");
@@ -135,6 +140,7 @@ describe("putDataTest", () => {
       );
     } catch (err: any) {
       expect(mock).toHaveBeenCalled();
+      expect(mock).toBeTruthy();
       expect(err.message).toBe("Id not found");
     }
   });
@@ -154,17 +160,18 @@ describe("deleteDataTest", () => {
       },
     ]);
     const res = await deleteData(1);
-    expect(mock).toHaveBeenCalled();
-    expect(res).toEqual([
-      {
-        id: 2,
-        title: "Завершить проект API",
-        description:
-          "Разработать REST API для управления задачами с использованием Node.js и PostgreSQL",
-        completed: true,
-        createdat: "2024-01-25T11:30:00.000Z",
-      },
-    ]);
+    expect(mock).toHaveBeenCalledWith(1);
+    expect(res).toHaveLength(1);
+    expect(res.length).toBeGreaterThanOrEqual(1);
+    expect(res).toBeTruthy();
+    expect(res).toContainEqual({
+      id: 2,
+      title: "Завершить проект API",
+      description:
+        "Разработать REST API для управления задачами с использованием Node.js и PostgreSQL",
+      completed: true,
+      createdat: "2024-01-25T11:30:00.000Z",
+    });
   });
   test("deleteTest: 2", async () => {
     const mock = jest.spyOn(repositories, "deleteDataRep");
@@ -174,6 +181,7 @@ describe("deleteDataTest", () => {
       await deleteData(2);
     } catch (err: any) {
       expect(mock).toHaveBeenCalled();
+      expect(mock).toBeTruthy();
       expect(err.message).toBe("Id does't exist");
     }
   });

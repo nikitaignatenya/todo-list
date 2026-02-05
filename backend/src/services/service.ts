@@ -6,7 +6,7 @@ import {
 } from "../repositories/repository";
 import { iTask } from "../interfacies/interface";
 
-async function getData() {
+async function getData(): Promise<iTask[]> {
   const res: iTask[] = await getDataRep();
   if (!res.length) throw new Error("NOT FOUND");
   return res;

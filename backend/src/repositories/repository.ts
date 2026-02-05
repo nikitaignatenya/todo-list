@@ -1,7 +1,7 @@
 import { pool } from "../db";
 import { iTask } from "../interfacies/interface";
 
-async function getDataRep() {
+async function getDataRep(): Promise<iTask[]> {
   const connection = await pool.connect();
   try {
     await connection.query("BEGIN");
