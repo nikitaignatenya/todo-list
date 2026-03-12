@@ -8,10 +8,17 @@ function App() {
   const [array, setArray] = useState([]);
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
+
   async function getAllData() {
-    const response = await axios.get("http://localhost:3000/tasks/");
-    setArray(response.data);
+    try {
+      const response = await axios.get("http://localhost:3000/tasks/");
+      setArray(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
   }
+
   async function createData() {
     try {
       if (!input1.length) throw new Error("Title пуст");
@@ -23,7 +30,15 @@ function App() {
         completed: false,
         createdat: "2024-01-25T11:30:00.000Z",
       });
-      console.log(response);
+      setArray(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  async function deletaData(id) {
+    try {
+      const response = await axios.delete(`http://localhost:3000/tasks/${id}`);
       setArray(response.data);
     } catch (error) {
       console.log(error.message);
@@ -64,7 +79,12 @@ function App() {
                 <p>{el.description}</p>
                 <div className={style.iconsContainer}>
                   <img src={image_1}></img>
-                  <img src={image_2}></img>
+                  <img
+                    src={image_2}
+                    onClick={() => {
+                      deletaData(el.id);
+                    }}
+                  ></img>
                 </div>
               </div>
             ))}
